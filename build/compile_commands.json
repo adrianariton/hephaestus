@@ -1,0 +1,77 @@
+[
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/BNcomplex.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BNcomplex.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BNcomplex.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/BNdecimal.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BNdecimal.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BNdecimal.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/BNint.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BNint.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BNint.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/BinaryBNint.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BinaryBNint.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/BinaryBNint.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/Greek.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/Greek.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/Greek.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/HTensor.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/HTensor.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/HTensor.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/MVExp.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/MVExp.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/MVExp.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/Response.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/Response.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/Response.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/big.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/big.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/big.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/big_cordic.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/big_cordic.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/big_cordic.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/exprez.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/exprez.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/exprez.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/heph_complex.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/heph_complex.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/heph_complex.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/hephaestus.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/hephaestus.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/hephaestus.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/main.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/main.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/main.cpp"
+},
+{
+  "directory": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-11   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/MathBase.dir/mvex.cpp.o -c /Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/mvex.cpp",
+  "file": "/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/mvex.cpp"
+}
+]

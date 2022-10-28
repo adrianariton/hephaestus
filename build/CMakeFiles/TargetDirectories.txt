@@ -1,0 +1,5 @@
+/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build/CMakeFiles/MathBase.dir
+/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build/CMakeFiles/package.dir
+/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build/CMakeFiles/package_source.dir
+/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build/CMakeFiles/edit_cache.dir
+/Users/adrianariton/Desktop/Adi/Projects/Libs/MathHandler/build/CMakeFiles/rebuild_cache.dir
