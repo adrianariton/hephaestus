@@ -3,7 +3,7 @@
 Hephaestus++ is a mathematical tool which has many components: FCO, BN and H(eph).
 
 ## BN - Big Numbers. 
-Big Numbers works head to toe with the big_cordic:: namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (floor, abs, to_decimal, to_binary etc) will be found in the big:: namespace
+Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the big_cordic:: namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (floor, abs, to_decimal, to_binary etc) will be found in the big:: namespace
 In a future update, they will all be included in the same namespace!
 
 Using the BNdecimal (aka bigreal) type:
@@ -31,3 +31,5 @@ There is also a natural number namespace which contains functions that take natu
     bigreal a_mod_b = natural_num::mod(a, b);
     bigreal a_quot_b = natural_num::divide(a, b);
 ```
+
+There are also bigint and bigin2 aka BNint and BinaryBNint
