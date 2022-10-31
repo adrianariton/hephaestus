@@ -23,3 +23,12 @@ Using the BNdecimal (aka bigreal) type:
 ```
 
 There is also a natural number namespace which contains functions that take natural numbers as inputs (still in the bigreal type)
+
+```c++
+    #include "hephaestus.cpp"
+    ...
+    bigreal gcd_ab = natural_num::gcd(a, b);
+    bigreal a_mod_b = natural_num::mod(a, b);
+    bigreal a_quot_b = natural_num::divide(a, b);
+
+```
