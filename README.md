@@ -7,7 +7,7 @@ Big Numbers works head to toe with the big_cordic:: namespace which contains all
 In a future update, they will all be included in the same namespace!
 
 Using the BNdecimal (aka bigreal) type:
-```c++
+```cpp
     #include "hephaestus.cpp"
     // ...
     bigreal a("3.14"), b("2.33");
@@ -24,7 +24,7 @@ Using the BNdecimal (aka bigreal) type:
 
 There is also a natural number namespace which contains functions that take natural numbers as inputs (still in the bigreal type)
 
-```c++
+```cpp
     #include "hephaestus.cpp"
     // ...
     bigreal gcd_ab = natural_num::gcd(a, b);
