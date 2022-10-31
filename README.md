@@ -7,7 +7,9 @@ Big Numbers works head to toe with the big_cordic:: namespace which contains all
 In a future update, they will all be included in the same namespace!
 
 Using the BNdecimal (aka bigreal) type:
-```
+```c++
+    #include "hephaestus.cpp"
+    ...
     bigreal a("3.14"), b("2.33");
     bigreal sin_a = big_cordic::sin(a);
     bigreal a_pow_b = big_cordic::pow(a, b);
@@ -16,5 +18,8 @@ Using the BNdecimal (aka bigreal) type:
 
     bigreal arctan_a, hyp_a;
     big_cordic::calc_arctan(a, arctan_a, hyp_a);
-
+    bigreal floor_a = big::floor(a); // used big::, because the floor function does not need high accuracy cordic computation
+    bigreal ab_sum = a + b, ab_prod = a * b, ab_div = a / b;
 ```
+
+There is also a natural number namespace which contains functions that take natural numbers as inputs (still in the bigreal type)
