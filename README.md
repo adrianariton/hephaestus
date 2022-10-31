@@ -47,12 +47,21 @@ There are also **bigint** and **bigint2** aka **BNint** and **BinaryBNint** resp
 
 ### The suffix operator _big
 It can be used to easily declare **bigreal** types. You need to include the **Heph_Utils.h** header.
+One can also declare **BNComplex** numbers (aka bigcomplex) and use the **hcomp** namespace for more complex-related functions. This namespace will soon receive an update.
 ```cpp
     #include "hephaestus.cpp"
     #include "Heph_Utils.h"
     // ...
-    auto a = 12.34_big
+    auto a = 12.34_big;
+    bigcomplex z = a * I_big + 1.23_big;
 ```
 
 ### The **brute** namespace
 The **brute** namespace consists of rough estimates of functions and is only for experimental purposes. It should not be used in practice, because the **big_cordic** namespace works much faster and has much more precision (100 digits).
+
+
+## H - Hephaestus More
+The H classes are new and some of them still in beta (**HSymbolic**), but provide methods that work with more abstract objects.
+
+The classes which are the most important are **HTensor**, **HShape**, **HPoly**, **HRational**, **HSymbolic** and **MVExp**.
+The last 2 will soon merge into one big class called **HSym** in a future update.
