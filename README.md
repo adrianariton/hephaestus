@@ -37,5 +37,14 @@ There are also **bigint** and **bigint2** aka **BNint** and **BinaryBNint** resp
 ```cpp
     #include "hephaestus.cpp"
     // ...
-    
+
+```
+
+### The suffix operator _big
+It can be used to easily declare **bigreal** types. You need to include the **Heph_Utils.h** header.
+```cpp
+    #include "hephaestus.cpp"
+    #include "Heph_Utils.h"
+    // ...
+    auto a = 12.34_big
 ```

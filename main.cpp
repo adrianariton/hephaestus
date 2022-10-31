@@ -24,12 +24,6 @@ using namespace std::chrono;
 
 USE_HEPHAESTUS_CPP
 
-
-
-
-
-
-
 long double my_fun(long double x){
     return std::pow(x, 6.0) - 4;
 }
@@ -75,12 +69,12 @@ int main() {
         cout<<roundToDecimal(10, rez)<<"  ";
     }
 
-    /**Remez*/
+    /** Remez min-max polynomial method */
     long double out_polyarr[MAX];
     int out_len;
     long double remez_err;
-
-    //fco_calc__RemezPolyArray(false ,my_fun, 0, 50, 15, 0.1, out_polyarr, out_len, remez_err);   <-- this can also be used to calculate for a given error and iterations
+    // - for fixed degree
+    // - fco_calc__RemezPolyArray(false ,my_fun, 0, 50, 15, 0.1, out_polyarr, out_len, remez_err);   <-- this can also be used to calculate for a given error and iterations
     fco_calc__optimalMinMaxPoly(my_fun, -2, 2, 1e-7, 21, out_polyarr, out_len, remez_err);
     cout<<"\n\nRemez polynomial:\n";
     for(int i=0;i<out_len;++i){
@@ -102,18 +96,7 @@ int main() {
     cout<<"f' - from poly ~Not reliable for remez:(~  "<<fco_calc__PolyValAt(__v, derivArr, out_len -1);
 
     
-    
-    /**
-     * TODO: Karatsuba's for multiplication (?) x
-     * TODO: Base2 Alternative (?) v 
-     */
-    
     cout<<"\n\n"<<"-----------------------Binary and CORDIC----------------------"<<"\n\n";
-    #ifndef BCORDIC_BASE_400
-    cout<<"BASE64\n\n";
-    #else
-    cout<<"BASE400\n\n";
-    #endif
 
     bigreal cs, cc, bdqs("0.7877143603132630285025");
     bigreal ccs, ccc, catan;
@@ -155,15 +138,14 @@ int main() {
 
 
     cout<<"\n\n";
-  //  cout<<big_cordic::exp(brute::sqrt(bigreal("3")))<<"    \n";
 
-    cout<<"\n\n"<<"-----------------------Math EXV-----------------------";
+    cout<<"\n\n"<<"-----------------------Math S    ymbolic String expression evaluator-----------------------";
 
     EXV_COUT_TYPES = true;
     mve myexp = mve("u^(u+6*x)+ln(x*u)");
-    cout<<mvef::solvefunction(myexp, {"x", "u"}, {2.4, 1.2})<<"RES\n\n";
+    cout<<mvef::solvefunction(myexp, {"x", "u"}, {2.4, 1.2})<<"\n\n";
+
     cout<<"\n\n--------FIRST DERIV--------\n\n";
-    
     std::string __G = mvef::dfdx_string(myexp, "u");
     cout<<__G<<"\n";
     cout<<mvef::latex(mve(__G))<<"\n";
@@ -201,7 +183,6 @@ int main() {
     for(int i=0;i<2;++i)
         t_values.push_back(i);
     
-    HTensor<int> myvsltens(5); 
                  
     LET mytens = TENSOR(int)(t_values, T_SHAPE); 
 
@@ -213,7 +194,9 @@ int main() {
     }
     std::cout<<"\n";
     std::cout<<"\n\n";
-    
+
+    HTensor<int> myvsltens(5); 
+
 
     HTensor<int> prtens = HTensor<int>::tensor_product(mytens, myvsltens);
     std::cout<<prtens;
@@ -440,8 +423,6 @@ int main() {
     LOG "aaaaa" DONE
 
     LET x_sym = HSymbolic("x") DONE
-    LOG "aaaaa" DONE
-    LOG_SECTION("AAAAAAA")
     (x_sym + x_sym).llog();
     LOG SYM _ to_clean_string(x_sym + x_sym) DONE
     LOG (x_sym + x_sym - (2*x_sym)) ALSO NEW_LINE DONE
@@ -573,13 +554,13 @@ int main() {
     LET y_ =  REAL100(2.31222);
     LET y2_ = REAL100(1.233333);
     LOG REAL100_FNS _ sin(y_) ENDL
+
     LOG PLAIN(x_sym + 2 - x_sym * x_sym + (x_sym + b_sym)*(b_sym - x_sym)) ENDL
 
 
     LOG_SECTION("TESTING AAAAAAAAAAAA")
 
-
-    HSymbolic maria_sym = HSymbolic("m_a");
+    HSymbolic maria_sym = HSymbolic("x");
     LOG PLAIN(maria_sym + 2 * maria_sym * (maria_sym + 1) - 3 * maria_sym) ENDL
 
 
