@@ -3,10 +3,10 @@
 Hephaestus++ is a mathematical tool which has many components: FCO, BN and H(eph).
 
 ## BN - Big Numbers. 
-Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the big_cordic:: namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (floor, abs, to_decimal, to_binary etc) will be found in the big:: namespace
+Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the **big_cordic::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace
 In a future update, they will all be included in the same namespace!
 
-Using the BNdecimal (aka bigreal) type:
+Using the **BNdecimal** (aka **bigreal**) type:
 ```cpp
     #include "hephaestus.cpp"
     // ...
@@ -22,7 +22,7 @@ Using the BNdecimal (aka bigreal) type:
     bigreal ab_sum = a + b, ab_prod = a * b, ab_div = a / b;
 ```
 
-There is also a natural number namespace which contains functions that take natural numbers as inputs (still in the bigreal type)
+There is also a natural number namespace (**natural_num**) which contains functions that take natural numbers as inputs (still using the **bigreal** type)
 
 ```cpp
     #include "hephaestus.cpp"
@@ -32,4 +32,10 @@ There is also a natural number namespace which contains functions that take natu
     bigreal a_quot_b = natural_num::divide(a, b);
 ```
 
-There are also bigint and bigin2 aka BNint and BinaryBNint
+There are also **bigint** and **bigint2** aka **BNint** and **BinaryBNint** respectively.
+
+```cpp
+    #include "hephaestus.cpp"
+    // ...
+    
+```
