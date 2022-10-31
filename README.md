@@ -90,9 +90,11 @@ Example of creation of 2 *3x3* tensors (izomorph to the space of 3x3 matrices), 
 
     HEinsteinNotation<long double> einstein_notation_tensorprod = __m(einstein_notation_tensor1, einstein_notation_tensor2);
 
+    // (*)
+
 ```
 
-In this case Einstein notation is used and HEPHAESTUS provides an easy MACRO to convert from tensors to einstein notations and viceversa. It also provides an easy way to loop through array-like objects using a macro-based language included in the **Heph_Utils.h** header.
+In this case Einstein notation is used and HEPHAESTUS provides an easy macro to convert from tensors to einstein notations and viceversa. It also provides an easy way to loop through array-like objects using a macro-based language included in the **Heph_Utils.h** header.
 
 ```cpp
     FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod.tensor, 
@@ -101,4 +103,26 @@ In this case Einstein notation is used and HEPHAESTUS provides an easy MACRO to 
 ```
 
 # The __ and __m macros and the HEPH language
-# Documentation will be added in the future
+## "__"
+The __ macro is used as a converter tool. It is short for *_heph_predef_normalize*, and can be used to get the value of a tensor at some coordinates, or the conversion from a tensor to an EinsteinNotation, to build a tensor with a shape and a values-vector or to calculate the value of a **mve** function.
+
+#### Simple example:
+
+```cpp
+    auto einstein_notation_tensor2 = __(tensor2, "^beta_gamma");
+    // einstein_notation_tensor2 will be of type HEinsteinNotation<long double>
+```
+You can think of it as a kind of "join" function which takes some inputs and returns 
+what it thinks you wanted to say.
+
+More such oveloads will be added in a future release.
+
+## "__m"
+
+#### __m is used in a similar way, only it multiplies the entries
+
+For example the (*) codebox is the same as
+
+```cpp
+    HEinsteinNotation<long double> einstein_notation_tensorprod = __m(tensor1, "^alpha_beta", tensor2, "^beta_gamma");
+```
