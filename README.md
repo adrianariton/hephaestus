@@ -9,7 +9,7 @@ In a future update, they will all be included in the same namespace!
 Using the BNdecimal (aka bigreal) type:
 ```c++
     #include "hephaestus.cpp"
-    ...
+    // ...
     bigreal a("3.14"), b("2.33");
     bigreal sin_a = big_cordic::sin(a);
     bigreal a_pow_b = big_cordic::pow(a, b);
@@ -26,7 +26,7 @@ There is also a natural number namespace which contains functions that take natu
 
 ```c++
     #include "hephaestus.cpp"
-    ...
+    // ...
     bigreal gcd_ab = natural_num::gcd(a, b);
     bigreal a_mod_b = natural_num::mod(a, b);
     bigreal a_quot_b = natural_num::divide(a, b);
