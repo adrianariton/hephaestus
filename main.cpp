@@ -563,8 +563,23 @@ int main() {
     HSymbolic maria_sym = HSymbolic("x");
     LOG PLAIN(maria_sym + 2 * maria_sym * (maria_sym + 1) - 3 * maria_sym) ENDL
 
+    std::vector<long double> tensor1_values = {1.1, 2.0, 3.2, 5.0, 6.2, 4.2, 8.8, 5.0, 8.3};
+    std::vector<long double> tensor2_values = {-1.4, 1.0, 7.2, 5.7, 6.72, 4.62, 8.850, 7.7, 5.760};
 
+    
+    HTensor<long double> tensor1(tensor1_values, MATRIX_3X3);
+    HTensor<long double> tensor2(tensor2_values, MATRIX_3X3);
 
+    HTensor<long double> tensorproduct = HTensor<long double>::tensor_product(tensor1, tensor2);
+
+    HEinsteinNotation<long double> einstein_notation_tensor1 = __(tensor1, "^alpha_beta");
+    HEinsteinNotation<long double> einstein_notation_tensor2 = __(tensor2, "^beta_gamma");
+
+    HEinsteinNotation<long double> einstein_notation_tensorprod = __m(einstein_notation_tensor1, einstein_notation_tensor2);
+
+    FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod.tensor, 
+        LOG einstein_notation_tensorprod.at(indices) NEAR "" DONE
+    )
     return 0;
 
 }

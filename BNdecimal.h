@@ -81,7 +81,7 @@ class BNdecimal{
 
         BNdecimal(std::string str);
         BNdecimal();
-        
+        BNdecimal(int a);
         friend BNdecimal operator +(const BNdecimal lhs,const BNdecimal rhs);
         friend BNdecimal operator -(const BNdecimal lhs,const BNdecimal rhs);
         friend BNdecimal operator *(const BNdecimal lhs,const BNdecimal rhs);

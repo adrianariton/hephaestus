@@ -28,6 +28,11 @@ BNdecimal::BNdecimal(std::string str){
 
 }
 
+
+BNdecimal::BNdecimal(int a){
+    *this = BNdecimal(std::to_string(a));
+}
+
 /**
  * 
  * @brief Construct a new BNdecimal::BNdecimal object 

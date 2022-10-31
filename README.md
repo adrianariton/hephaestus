@@ -65,3 +65,40 @@ The H classes are new and some of them still in beta (**HSymbolic**), but provid
 
 The classes which are the most important are **HTensor**, **HShape**, **HPoly**, **HRational**, **HSymbolic** and **MVExp**.
 The last 2 will soon merge into one big class called **HSym** in a future update.
+
+## HTensor and HShape
+Tensors are very abstract (let's say matrix-like) objects. They are used in relativity. For now they are only implemented over the **long double** space, but soon there will also be a **bigreal** version for more exact calculations.
+
+Example of creation of 2 *3x3* tensors (izomorph to the space of 3x3 matrices), and implementing the matrix product.
+
+```cpp
+    #include "hephaestus.cpp"
+    #include "Heph_Utils.h"
+    // ...
+
+    std::vector<long double> tensor1_values = {1.1, 2.0, 3.2, 5.0, 6.2, 4.2, 8.8, 5.0, 8.3};
+    std::vector<long double> tensor2_values = {-1.4, 1.0, 7.2, 5.7, 6.72, 4.62, 8.850, 7.7, 5.760};
+
+    
+    HTensor<long double> tensor1(tensor1_values, MATRIX_3X3);
+    HTensor<long double> tensor2(tensor2_values, MATRIX_3X3);
+
+    HTensor<long double> tensorproduct = HTensor<long double>::tensor_product(tensor1, tensor2);
+
+    HEinsteinNotation<long double> einstein_notation_tensor1 = __(tensor1, "^alpha_beta");
+    HEinsteinNotation<long double> einstein_notation_tensor2 = __(tensor2, "^beta_gamma");
+
+    HEinsteinNotation<long double> einstein_notation_tensorprod = __m(einstein_notation_tensor1, einstein_notation_tensor2);
+
+```
+
+In this case Einstein notation is used and HEPHAESTUS provides an easy MACRO to convert from tensors to einstein notations and viceversa. It also provides an easy way to loop through array-like objects using a macro-based language included in the **Heph_Utils.h** header.
+
+```cpp
+    FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod.tensor, 
+        LOG einstein_notation_tensorprod.at(indices) NEAR "" DONE
+    )
+```
+
+# The __ and __m macros and the HEPH language
+#Documentation will be added in the future

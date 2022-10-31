@@ -473,7 +473,7 @@ class HEinsteinNotation{
                 HEinsteinNotation _raisedone = entens.raise_index(index_name, index_name);
                 std::vector<int> cc = corresp_coord;
                 cc.at(index_to_lwr) = di;
-                val += (T)(METRIC_LAMBDA(cc_ind, cc.at(index_to_lwr))) * HEinsteinNotation::value_at_gd(_raisedone, cc, ms);
+                val = val + (T)(METRIC_LAMBDA(cc_ind, cc.at(index_to_lwr))) * HEinsteinNotation::value_at_gd(_raisedone, cc, ms);
             }
             return val;
         }
