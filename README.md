@@ -37,6 +37,11 @@ There are also **bigint** and **bigint2** aka **BNint** and **BinaryBNint** resp
 ```cpp
     #include "hephaestus.cpp"
     // ...
+    // see if string is number
+    std::cout<< (big::is_number("123.32asa")) ;
+    
+    bigint2 binary_a = big::to_binary(a);
+    bigreal same_a = big::to_decimal(binary_a);
 
 ```
 
@@ -48,3 +53,6 @@ It can be used to easily declare **bigreal** types. You need to include the **He
     // ...
     auto a = 12.34_big
 ```
+
+### The **brute** namespace
+The **brute** namespace consists of rough estimates of functions and is only for experimental purposes. It should not be used in practice, because the **big_cordic** namespace works much faster and has much more precision (100 digits).
