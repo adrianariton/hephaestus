@@ -94,6 +94,23 @@ Example of creation of 2 *3x3* tensors (izomorph to the space of 3x3 matrices), 
 
 ```
 
+You can also use the **DEF_TENSOR_PRODUCT_TO_INDEXED_TENSOR** macro to easily define a product between 2 tensors. It declares a lambda-function which provided 2 tensors returns an indexed tensor (using Einstein's notation).
+
+```cpp
+    DEF_TENSOR_PRODUCT_TO_INDEXED_TENSOR(innerprod, REAL, _x, "_alpha", _y, "^alpha", _x.dim() == 1 && _y.dim()==1);
+    DEF_TENSOR_PRODUCT_TO_INDEXED_TENSOR(matrixprod, REAL, _x, "^alpha_beta", _y, "^beta_gamma", _x.dim() == 2 && _y.dim()==2);
+```
+
+You can call them using the name preceded by **DEFN_**:
+
+```cpp
+    LET m1_mak = __(m1vals, MATRIX_3X3) DONE
+    LET m2_mak = __(m2vals, MATRIX_3X3) DONE
+    LET m1m2 = DEFN_matrixprod(m1_mak, m2_mak) DONE
+```
+[See about the __ macro [here](#The-__-and-__m-macros-and-the-HEPH-language)]
+
+
 In this case Einstein notation is used and HEPHAESTUS provides an easy macro to convert from tensors to einstein notations and viceversa. It also provides an easy way to loop through array-like objects using a macro-based language included in the **Heph_Utils.h** header.
 
 ```cpp
@@ -122,7 +139,7 @@ More such oveloads will be added in a future release.
 
 #### __m is used in a similar way, only it multiplies the entries
 
-For example the (*) codebox is the same as
+For example the [(*)](#HTensor-and-HShape) codebox is the same as
 
 ```cpp
     HEinsteinNotation<long double> einstein_notation_tensorprod = __m(tensor1, "^alpha_beta", tensor2, "^beta_gamma");
