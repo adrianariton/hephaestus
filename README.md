@@ -67,7 +67,7 @@ The classes which are the most important are **HTensor**, **HShape**, **HPoly**,
 The last 2 will soon merge into one big class called **HSym** in a future update.
 
 ## HTensor and HShape
-Tensors are very abstract (let's say matrix-like) objects. They are used in relativity. For now they are only implemented over the **long double** space, but soon there will also be a **bigreal** version for more exact calculations. *UPDATE: **bigreal** support for tensors has been added Friday 4 November 2022. Please report any bugs!*
+Tensors are very abstract (let's say matrix-like) objects. They are used in relativity. For now they are only implemented over the **long double** space, ~~but soon there will also be a **bigreal** version for more exact calculations~~. *UPDATE: **bigreal** support for tensors has been added Friday 4 November 2022. Please report any bugs!*
 
 Example of creation of 2 *3x3* tensors (izomorph to the space of 3x3 matrices), and implementing the matrix product.
 
