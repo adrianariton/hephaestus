@@ -147,7 +147,7 @@ BNint operator -(const BNint lhs, const BNint rhs){
         it_h--;
         it_rhs--;
     }
-    while(res.at(0) == '0'){
+    while(res.at(0) == '0' && res.size() > 1){
         res.erase(0,1);
 
     }

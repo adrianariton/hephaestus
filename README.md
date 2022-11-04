@@ -67,7 +67,7 @@ The classes which are the most important are **HTensor**, **HShape**, **HPoly**,
 The last 2 will soon merge into one big class called **HSym** in a future update.
 
 ## HTensor and HShape
-Tensors are very abstract (let's say matrix-like) objects. They are used in relativity. For now they are only implemented over the **long double** space, but soon there will also be a **bigreal** version for more exact calculations.
+Tensors are very abstract (let's say matrix-like) objects. They are used in relativity. For now they are only implemented over the **long double** space, but soon there will also be a **bigreal** version for more exact calculations. *UPDATE: **bigreal** support for tensors has been added Friday 4 November 2022. Please report any bugs!*
 
 Example of creation of 2 *3x3* tensors (izomorph to the space of 3x3 matrices), and implementing the matrix product.
 
@@ -103,6 +103,7 @@ In this case Einstein notation is used and HEPHAESTUS provides an easy macro to 
 ```
 
 # The __ and __m macros and the HEPH language
+#### As you saw before HEPHAESTUS++ also comes with a simplified macro-language. We will now look through the most important thigs you can do with this language.
 ## "__"
 The __ macro is used as a converter tool. It is short for *_heph_predef_normalize*, and can be used to get the value of a tensor at some coordinates, or the conversion from a tensor to an EinsteinNotation, to build a tensor with a shape and a values-vector or to calculate the value of a **mve** function.
 

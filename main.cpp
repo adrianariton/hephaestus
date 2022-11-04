@@ -563,24 +563,56 @@ int main() {
     HSymbolic maria_sym = HSymbolic("x");
     LOG PLAIN(maria_sym + 2 * maria_sym * (maria_sym + 1) - 3 * maria_sym) ENDL
 
-    std::vector<long double> tensor1_values = {1.1, 2.0, 3.2, 5.0, 6.2, 4.2, 8.8, 5.0, 8.3};
-    std::vector<long double> tensor2_values = {-1.4, 1.0, 7.2, 5.7, 6.72, 4.62, 8.850, 7.7, 5.760};
+    std::vector<long double> tensor1_values_db = {1.1, 2.0, 3.2, 5.0, 6.2, 4.2, 8.8, 5.0, 8.3};
+    std::vector<long double> tensor2_values_db = {-1.4, 1.0, 7.2, 5.7, 6.72, 4.62, 8.850, 7.7, 5.760};
 
     
-    HTensor<long double> tensor1(tensor1_values, MATRIX_3X3);
-    HTensor<long double> tensor2(tensor2_values, MATRIX_3X3);
+    HTensor<long double> tensor1_db(tensor1_values_db, MATRIX_3X3);
+    HTensor<long double> tensor2_db(tensor2_values_db, MATRIX_3X3);
 
-    HTensor<long double> tensorproduct = HTensor<long double>::tensor_product(tensor1, tensor2);
+    HTensor<long double> tensorproduct_db = HTensor<long double>::tensor_product(tensor1_db, tensor2_db);
 
-    HEinsteinNotation<long double> einstein_notation_tensor1 = __(tensor1, "^alpha_beta");
-    HEinsteinNotation<long double> einstein_notation_tensor2 = __(tensor2, "^beta_gamma");
+    std::vector<REAL100> tensor1_values = {1.1_big, 2.0_big, 3.2_big, 5.0_big, 6.2_big, 4.2_big, 8.8_big, 5.0_big, 8.3_big};
+    std::vector<REAL100> tensor2_values = {-1.4_big, 1.0_big, 7.2_big, 5.7_big, 6.72_big, 4.62_big, 8.850_big, 7.7_big, 5.760_big};
 
-    HEinsteinNotation<long double> einstein_notation_tensorprod = __m(einstein_notation_tensor1, einstein_notation_tensor2);
+    
+    HTensor<REAL100> tensor1(tensor1_values, MATRIX_3X3);
+    HTensor<REAL100> tensor2(tensor2_values, MATRIX_3X3);
 
-    FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod.tensor, 
-        LOG einstein_notation_tensorprod.at(indices) NEAR "" DONE
+    HTensor<REAL100> tensorproduct = HTensor<REAL100>::tensor_product(tensor1, tensor2);
+
+
+    FOREACH(i, indices, IN_TENSOR, tensorproduct, 
+        LOG tensorproduct.at(indices) NEAR tensorproduct_db.at(indices) NEAR "" DONE
     )
-    return 0;
+
+
+    HEinsteinNotation<REAL100> einstein_notation_tensor1 = __(tensor1, "^alpha_beta");
+    HEinsteinNotation<REAL100> einstein_notation_tensor2 = __(tensor2, "^beta_gamma");
+
+    HEinsteinNotation<REAL> einstein_notation_tensor1_db = __(tensor1_db, "^alpha_beta");
+    HEinsteinNotation<REAL> einstein_notation_tensor2_db = __(tensor2_db, "^alpha_beta");
+
+
+    LOG_SECTION("REAL100-TENS-PRODS");
+
+    //std::cout<<(bigreal("0") * 2.3_big)<<"\n";
+
+    // FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod_db.tensor, 
+    //     LOG einstein_notation_tensorprod_db.at(indices) NEAR "real_" DONE
+    //     if(i > 9) break;
+    // )
+    HEinsteinNotation<REAL> einstein_notation_tensorprod_db = __m(einstein_notation_tensor1_db, einstein_notation_tensor2_db);
+    HEinsteinNotation<REAL100> einstein_notation_tensorprod = einstein_notation_tensor1 * einstein_notation_tensor2;
+
+    printf("done\n");
+
+    //HEinsteinNotation<REAL100> einstein_notation_tensorprod = __m(einstein_notation_tensor1, einstein_notation_tensor2);
+
+    FOREACH(i, indices, IN_TENSOR, einstein_notation_tensor1_db.tensor, 
+        LOG einstein_notation_tensor1_db.at(indices) NEAR einstein_notation_tensor1.at(indices) NEAR "" DONE
+    )
+     return 0;
 
 }
 

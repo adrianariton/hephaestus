@@ -366,15 +366,17 @@ class HEinsteinNotation{
 
         std::vector<T> vals_for_res;
         for(int i=0; i<HShape(vek_tensorshape).signature(); ++i){
+          //  printf("hahahaha\n");
             vals_for_res.push_back( (T)(0) );
         }
         //std::cout<<"\ngot to bigfor\n";
         HTensor<T> _res_tensor(vals_for_res, HShape(vek_tensorshape) );
         //std::cout<<_res_tensor<<"RESTENS";
         for(int i=0; i<HShape(vek_tensorshape).signature(); ++i){
+        //    printf("tetete\n");
             //std::cout<<"\n"<<i<<" of "<<HShape(vek_tensorshape).signature()<<"\n";
             std::vector<int> coords_in_res = _res_tensor.coords_forindex(i, vek_tensorshape);
-           // std::cout<<coords_in_res.size()<<"\n";
+          //  std::cout<<coords_in_res.size()<<"\n";
             std::vector<int> coords_in_old = coords_in_res;
 
             if(to_fix_ind > to_index_ind){
@@ -389,23 +391,30 @@ class HEinsteinNotation{
                  coords_in_old.push_back(0), to_index_ind = coords_in_old.size() - 1;
              else
                  coords_in_old.insert(coords_in_old.begin() + to_index_ind, 0);
-            //     std::cout<<"\nvects:";
-            // htlog_vect(coords_in_old);
-            // htlog_vect(coords_in_res);
-            // std::cout<<"\n";
-            //std::cout<<"size_contr_dim: "<<size_of_contracted_dim<<"\n";
+       //          std::cout<<"\nvects:";
+      //   htlog_vect(coords_in_old);
+      //       htlog_vect(coords_in_res);
+      //       std::cout<<"\n";
+      //      std::cout<<"size_contr_dim: "<<size_of_contracted_dim<<"\n";
             if(_res_tensor.at(coords_in_res).val() == (T)(0))
             for(int _si = 0; _si<size_of_contracted_dim; ++_si){
+        //        std::cout<<"@@@@@@@@\n\nyyy "<<_si<<"\n";
                 coords_in_old.at(to_fix_ind) = _si;
+          //      std::cout<<"HA0\n";
                 coords_in_old.at(to_index_ind) = _si;
-       
+            //    std::cout<<"HA1\n";
+              //  std::cout<<(*this).tensor<<"|\n";
+
+               // std::cout<<"\n------\n";
+               // std::cout<<"valalalal: "<<(*this).at(coords_in_old)<<"\n";
                 T _thisval = (*this).at(coords_in_old);
+                //std::cout<<"HA2\n";
                 HTensor<T> _aux = HTensor<T>(_res_tensor.at(coords_in_res).val() + (*this).at(coords_in_old));
-                
+               // std::cout<<"HA3\n";
                 _res_tensor.at(coords_in_res) = _aux;
             }
         }
-        // - std::cout<<"AOOAOA  ";
+       // std::cout<<"AOOAOA\n";
         return HEinsteinNotation(_res_tensor, indices_of_new, is_up_);
 
     }
@@ -421,29 +430,32 @@ class HEinsteinNotation{
     }
     static HEinsteinNotation reduce(HEinsteinNotation tens_en){
         int sw=0;
-        for(int i=0; i< tens_en.indices.size(); ++i){
-                for(int j=0; j< tens_en.indices.size(); ++j){
+     //   printf("redox");
+        for(int i=0; i < tens_en.indices.size(); ++i){
+                for(int j=0; j < tens_en.indices.size(); ++j){
                     if(tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
-                        std::cout<<"\n"<<tens_en.indices.at(i)<<" "<<i<<" "<<j<<"\n";
+          //              std::cout<<"\n"<<tens_en.indices.at(i)<<" "<<i<<" "<<j<<"sasalele\n";
                         sw=1;
                     }
                 }
             
         }
-        //std::cout<<sw;
+    //    std::cout<<"hey ya\n";
+    //    //std::cout<<sw;
         if(sw == 0) return tens_en;
         int qi=-1, qj=-1;
-        for(int i=0; i< tens_en.indices.size(); ++i){
-                for(int j=0; j< tens_en.indices.size(); ++j){
+        for(int i=0; i < tens_en.indices.size(); ++i){
+                for(int j=0; j < tens_en.indices.size(); ++j){
                     if( tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
-                      //  std::cout<<"\nshallreturn\n";
+            //           std::cout<<"\nshallreturn\n";
                         qi = i;
-                        qj=j;
+                        qj = j;
                     }
                 }
 
            
         }
+       // std::cout<<"hlhlhl\n";
         return HEinsteinNotation::reduce( tens_en.fix_index_to_index(qi, qj) );
 
     }
@@ -461,27 +473,40 @@ class HEinsteinNotation{
     
     static T value_at_gd( HEinsteinNotation entens, std::vector<int> corresp_coord, std::vector<int> ms){
         std::vector<int> indices_to_lwr = {};
+      //  std::cout<<"VALATGD\n";
         HEinsteinNotation uppd = HEinsteinNotation::to_upper(entens, indices_to_lwr);
-        
+      //  std::cout<<"indlwsz: "<<indices_to_lwr.size()<<" --> "<<(indices_to_lwr.size() == 0)<<"\n";
+       // htlog_vect(corresp_coord);
+      //  std::cout<<"AQQQQ\n"<<entens.tensor.at(corresp_coord).val()<<"\n";
         if(indices_to_lwr.size() == 0) return entens.tensor.at(corresp_coord).val();
         T val = 0;
         for(int i=0; i<indices_to_lwr.size(); ++i){
             int index_to_lwr = indices_to_lwr.at(i);
             std::string index_name = entens.indices.at(index_to_lwr);
+           // std::cout<<indices_to_lwr.size()<<" >i:"<<i<<"\n";
             int cc_ind = corresp_coord.at(index_to_lwr);
             for(int di = 0; di<ms.at(index_to_lwr); ++di){
                 HEinsteinNotation _raisedone = entens.raise_index(index_name, index_name);
                 std::vector<int> cc = corresp_coord;
                 cc.at(index_to_lwr) = di;
+              //  printf(" {\n");
+                //std::cout<<" ml: "<<(T)(METRIC_LAMBDA(cc_ind, cc.at(index_to_lwr)))<<"\n";
                 val = val + (T)(METRIC_LAMBDA(cc_ind, cc.at(index_to_lwr))) * HEinsteinNotation::value_at_gd(_raisedone, cc, ms);
+                //std::cout<<"mlover\n";
+                //printf(" }\n");
             }
-            return val;
+            //printf(" J\n");
+           // std::cout<<val<<"\n";
+//            return val;
         }
+        return val;
         // SOLVED --  BUG
     }
 
     T at(std::vector<int> coords){
-        return HEinsteinNotation::value_at_gd( (*this) , coords, (*this).tensor.measures() );
+        T q = HEinsteinNotation::value_at_gd( (*this) , coords, (*this).tensor.measures() );
+      //  std::cout<<"QED\n";
+        return q;
     }
 
     HShape shape(){
@@ -506,6 +531,7 @@ class HEinsteinNotation{
 
     static HEinsteinNotation tens_multiply(HEinsteinNotation lhs, HEinsteinNotation rhs){
         HEinsteinNotation tprod = HEinsteinNotation::tens_product(lhs, rhs);
+        //printf("ALALALALGON");
         return HEinsteinNotation::reduce(tprod);
     }
 
