@@ -269,15 +269,6 @@ int main() {
     FOREACH(i, elem, IN_VECTYPE, _mystrstr, 
         LOG elem DONE
     )
-    DEBUG(
-        IF vek.size() == 3 THEN
-            LOG "Weeeeeeeee" DONE
-            LOG "HHAHHHAHA" DONE
-        ELIF vek.size() == 2 THEN
-            LOG "WOOOOO" DONE
-        ELSE LOG "WTEIEIE" DONE
-        END_IF
-    )
 
 
     LET clambda = LAMBDA(REAL _X){
@@ -417,138 +408,15 @@ int main() {
     LET a_com = (2_big * I_big + 3_big - I_big * I_big + 6_big) / I_big;
     LOG a_com DONE
     LOG_SECTION("SYMBOLIC MATH")
-        LOG "aaaaa" DONE
-
-        LET b_sym = HSymbolic("b") DONE
-    LOG "aaaaa" DONE
-
+    
+    
+    LET b_sym = HSymbolic("b") DONE
     LET x_sym = HSymbolic("x") DONE
     (x_sym + x_sym).llog();
     LOG SYM _ to_clean_string(x_sym + x_sym) DONE
     LOG (x_sym + x_sym - (2*x_sym)) ALSO NEW_LINE DONE
     LOG (3_sym * sqrt(x_sym)  - x_sym - sqrt(x_sym) + 3_sym * x_sym * 3_sym * x_sym) - sqrt(x_sym) + x_sym*x_sym + x_sym ALSO NEW_LINE DONE
     LOG (2_sym * 5_sym * x_sym * x_sym + sqrt(x_sym)) ALSO NEW_LINE DONE
-    LOG_SECTION("SYMBOLIC MATH 2")
-    LOG ((x_sym + sin(x_sym))*(1_sym - cos(x_sym)) - x_sym + sin(x_sym)*cos(x_sym)) ALSO NEW_LINE DONE
-    LOG (sin(x_sym) - x_sym * cos(x_sym)) DONE
-    LOG_SECTION("SYMBOLIC MATH 3")
-    LET q_sym = ((cos(x_sym) + sin(x_sym))*(cos(x_sym) + sin(x_sym))) DONE
-    q_sym.logmap();
-    LOG simplify((cos(x_sym) + sin(x_sym))*(cos(x_sym) + sin(x_sym)) + x_sym*3_sym + 6_sym) ALSO NEW_LINE DONE
-    LOG_SECTION("SYMBOLIC MATH 4")
-    LOG simplify(5 * cos(x_sym) * cos(x_sym) + sin(x_sym)*sin(x_sym)) NEAR 5 * cos(x_sym) * cos(x_sym) + sin(x_sym)*sin(x_sym) DONE
-    LOG_SECTION("SYMBOLIC MATH 5")
-    LOG (sqrt(3_sym) + 5)*x_sym - x_sym * 2 * sqrt(3_sym) - (3 - sqrt(3_sym))*x_sym DONE
-        LOG_SECTION("SYMBOLIC MATH 6")
-
-    LOG replacevar(x_sym, {"x", "a"}) ALSO NEW_LINE DONE
-    LET r_sym = x_sym*4*2*(3*x_sym*b_sym);
-    r_sym.logmap();
-        LOG_SECTION("rRSYM")
-
-    LET rr_sym = 2_sym*x_sym*x_sym*3*4*b_sym;
-
-    rr_sym.logmap();
-    LOG_SECTION("RSYM")
-    LOG r_sym ALSO NEW_LINE ALSO rr_sym  NEAR (x_sym*(x_sym*x_sym*x_sym)* (x_sym * b_sym)) NEAR (x_sym*x_sym*x_sym*x_sym* (x_sym * b_sym))  NEAR (x_sym * b_sym) ALSO NEW_LINE DONE
-    LOG x_sym*1_sym*1_sym END_LINE
-    (x_sym*1_sym*1_sym).logmap();
-    LOG_SECTION("1")
-        (x_sym * b_sym).logmap();
-            LOG_SECTION("7")
-
-(x_sym*x_sym*x_sym*x_sym* (x_sym * b_sym)).logmap();
-// sin((x_sym*x_sym*x_sym*x_sym* (x_sym * b_sym)).strip().strip()).logmap();
-
-// (5_sym* (x_sym * b_sym)).logmap();
-
-// (x_sym * 2_sym).logmap();
-
-
-    LOG sin(2 * x_sym + cos(x_sym)) ALSO NEW_LINE DONE
-    LOG 2 * x_sym + cos(x_sym) ALSO NEW_LINE DONE
-    LOG ( (x_sym * b_sym) + (2_sym * 3_sym) + (2_sym * x_sym) + (x_sym * 7_sym) + (x_sym * 2_sym * b_sym + 5_sym)) ALSO NEW_LINE DONE
-
-    LOG (x_sym + x_sym*x_sym).ring_elements.begin()->first.func DONE
-    LOG_SECTION("SYMM")
-    LET w_sym = (x_sym * x_sym) ;
-    w_sym.logmap();
-    LOG (x_sym * x_sym)*(b_sym) ALSO NEW_LINE DONE
-    LOG_SECTION("KJGJGKJGKJHKJFKJHG")
-    HSymbolic g_sym = (x_sym * x_sym)*(b_sym);
-     LOG "ksym";
-        LOG g_sym ALSO NEW_LINE DONE
-    LOG_SECTION("HEYYYAYY")
-    LOG SYM _ to_clean_string((x_sym)*(cos(b_sym)*(cos(b_sym)) + sin(b_sym)*sin(b_sym))) END_LINE
-    LOG SYM _ to_clean_string(x_sym + b_sym + g_sym) END_LINE
-    LOG (g_sym + b_sym + x_sym) END_LINE
-    LOG ((x_sym ) / (x_sym* b_sym)) END_LINE
-    (x_sym + w_sym + g_sym + b_sym).logmap();
-    LOG (x_sym + w_sym + g_sym + b_sym) END_LINE
-    LOG (x_sym).inv() NEAR (x_sym * b_sym * x_sym).inv() ENDL
-    LOG (x_sym * x_sym).inv() NEAR x_sym.inv() ENDL
-    LOG_SECTION("AJJAJA")
-    LOG (3_sym * 2_sym + x_sym * g_sym )/(x_sym) ENDL
-    LOG (6_sym * g_sym)/(x_sym * x_sym * g_sym * (x_sym+b_sym)) * x_sym + g_sym ENDL
-    LOG (x_sym + b_sym).inv() ENDL
-    (x_sym + b_sym).inv().logmap();
-
-    (x_sym * x_sym * g_sym * (x_sym+b_sym)).inv().logmap();
-    (x_sym * x_sym * g_sym * (x_sym+b_sym)).logmap();
-    LOG (x_sym * x_sym * g_sym * (x_sym+b_sym)) ENDL
-    LET e_sym = (x_sym + b_sym) * (x_sym + b_sym) ;
-    LOG e_sym NEAR SYM _ to_string(e_sym.inv()) NEAR e_sym.inv().inv() ENDL
-    (e_sym).logmap();
-    (e_sym).inv().logmap();
-    (e_sym).inv().inv().logmap();
-    (e_sym).inv().inv().inv().logmap();
-    (e_sym).inv().inv().inv().inv().logmap();
-     // LOG (mvef _ plain) (SYM _ to_mve(e_sym.inv())) ENDL
-    //  LOG (x_sym * x_sym).strip()*(x_sym*x_sym).strip() ENDL
-    LOG_SECTION("JKJKJKKJK")
- 
-    LOG SYM _ to_clean_string((x_sym * b_sym * x_sym) / (e_sym)) ENDL
-    LOG SYM _ to_clean_string((x_sym*x_sym)/e_sym * (b_sym + x_sym ) ) ENDL
-    LOG (x_sym*x_sym)/e_sym ENDL
-    LOG x_sym.inv() * x_sym.inv().inv() ENDL
-    // x_sym = x_sym * b_sym;
-        LOG_SECTION("JKJKJKKJK")
-
-    LOG x_sym ENDL
-    LOG x_sym.inv() ENDL
-    x_sym.logmap();
-    LOG x_sym.ismultiply_ring() NEAR x_sym.val() NEAR "Lol" ENDL
-    x_sym.logmap();
-    x_sym.inv().logmap();
-
-    x_sym.inv().inv().logmap();
-    LOG x_sym.inv().inv() + x_sym ENDL
-    x_sym.inv().inv().inv().logmap();
-    x_sym.inv().inv().inv().inv().logmap();
-
-    (x_sym.inv().inv().inv() + x_sym).logmap();
-    LOG (x_sym + b_sym)*(x_sym + b_sym) - 2*x_sym * b_sym ENDL
-    LOG PLAIN(sin(x_sym + x_sym) * (b_sym + e_sym)) ENDL
-    LOG sin(x_sym + x_sym).ismultiply_ring() NEAR b_sym.ismultiply_ring() ENDL
-    LOG PLAIN(sin (x_sym + x_sym) * b_sym) ENDL
-    LOG PLAIN(sin (x_sym + b_sym) * b_sym - (b_sym + x_sym)*sin(b_sym + x_sym)) ENDL
-    //(sin (x_sym + x_sym) * b_sym - (b_sym + x_sym)*sin(b_sym + x_sym)).logmap();
-    LOG PLAIN((b_sym + x_sym)*sin(b_sym + x_sym)) ENDL
-    LOG PLAIN((b_sym * x_sym + x_sym * x_sym)/x_sym/(b_sym + x_sym)) ENDL
-    LOG PLAIN(x_sym + x_sym * g_sym / b_sym + (b_sym + g_sym)/b_sym + 1 - (x_sym + 1 + x_sym*(x_sym + 1)*x_sym)) ENDL
-    LOG PLAIN(x_sym + 1 + x_sym*(x_sym + 1)*x_sym) ENDL
-    // LOG x_sym.inv() ENDL
-    // LOG x_sym ENDL
-    // (2_sym * x_sym * x_sym).logmap();
-    // (x_sym * x_sym).logmap();
-    // LOG (x_sym * x_sym * 2_sym).strip().f("").hug()/(b_sym + x_sym) ENDL
-    // ((x_sym*x_sym)/e_sym * (b_sym._getv())).strip().logmap();
-    // LOG SYM _ to_clean_string ((2_sym *x_sym*x_sym)/e_sym * (b_sym + x_sym) ) ENDL
-    //  // LOG SYM _ to_clean_string((e_sym.inv() * (x_sym * x_sym)).inv()) ENDL
-    // LOG (2* x_sym * x_sym)*x_sym/x_sym ENDL
-    //     LOG (2 * x_sym * x_sym)*(b_sym + x_sym) ENDL
-
-    // LOG (2 * x_sym * x_sym) ENDL
 
     LOG_SECTION("PLAY")
     LET y_ =  REAL100(2.31222);
@@ -596,18 +464,8 @@ int main() {
 
     LOG_SECTION("REAL100-TENS-PRODS");
 
-    //std::cout<<(bigreal("0") * 2.3_big)<<"\n";
-
-    // FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod_db.tensor, 
-    //     LOG einstein_notation_tensorprod_db.at(indices) NEAR "real_" DONE
-    //     if(i > 9) break;
-    // )
     HEinsteinNotation<REAL> einstein_notation_tensorprod_db = __m(einstein_notation_tensor1_db, einstein_notation_tensor2_db);
     HEinsteinNotation<REAL100> einstein_notation_tensorprod = einstein_notation_tensor1 * einstein_notation_tensor2;
-
-    printf("done\n");
-
-    //HEinsteinNotation<REAL100> einstein_notation_tensorprod = __m(einstein_notation_tensor1, einstein_notation_tensor2);
 
     FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod_db.tensor, 
         LOG einstein_notation_tensorprod_db.at(indices) ALSO " " DONE
