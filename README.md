@@ -165,6 +165,7 @@ One can integrate a rational function (formed by taking the raport of two ratioa
 
 ```
 where the **_frac** suffix operator returns HRational fraction with denominator 1.
+
 *integrate_polyfrac* returns a string which has the full function. It might not work for polynomials with non-real solutions.
 
 A future update will contain
