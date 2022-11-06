@@ -4,9 +4,9 @@ Hephaestus++ is a mathematical tool which has many components: FCO, BN and H(eph
 
 Hephaestus can be built with CMake.
 
-Requirements: 
-    - CMake extensions (VScode)
-    - g++ and gcc compilers
+Requirements:
+- CMake extensions (VScode)
+- g++ and gcc compilers
 
 ## BN - Big Numbers. 
 Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the **big_cordic::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace
@@ -145,7 +145,7 @@ More such oveloads will be added in a future release.
 
 #### __m is used in a similar way, only it multiplies the entries
 
-For example the [(*)](#HTensor-and-HShape) codebox is the same as
+For example the [( * )](#HTensor-and-HShape) codebox is the same as
 
 ```cpp
     HEinsteinNotation<long double> einstein_notation_tensorprod = __m(tensor1, "^alpha_beta", tensor2, "^beta_gamma");
