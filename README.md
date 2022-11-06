@@ -154,7 +154,7 @@ For example the [( * )](#HTensor-and-HShape) codebox is the same as
 # HPoly and QPOLY
 
 As the name suggest, they are polynomial classes, the last one representing Rational Polynomials. 
-QPOLY represents a sortcut macro for HPoly<HRational>.
+QPOLY represents a sortcut macro for `HPoly<HRational>`.
 
 One can integrate a rational function (formed by taking the raport of two ratioal polynomials) as such:
 
