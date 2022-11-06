@@ -497,7 +497,7 @@ class HEinsteinNotation{
             }
             //printf(" J\n");
            // std::cout<<val<<"\n";
-//            return val;
+            return val;
         }
         return val;
         // SOLVED --  BUG

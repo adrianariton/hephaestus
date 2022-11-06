@@ -591,7 +591,7 @@ int main() {
     HEinsteinNotation<REAL100> einstein_notation_tensor2 = __(tensor2, "^beta_gamma");
 
     HEinsteinNotation<REAL> einstein_notation_tensor1_db = __(tensor1_db, "^alpha_beta");
-    HEinsteinNotation<REAL> einstein_notation_tensor2_db = __(tensor2_db, "^alpha_beta");
+    HEinsteinNotation<REAL> einstein_notation_tensor2_db = __(tensor2_db, "^beta_gamma");
 
 
     LOG_SECTION("REAL100-TENS-PRODS");
@@ -609,8 +609,9 @@ int main() {
 
     //HEinsteinNotation<REAL100> einstein_notation_tensorprod = __m(einstein_notation_tensor1, einstein_notation_tensor2);
 
-    FOREACH(i, indices, IN_TENSOR, einstein_notation_tensor1_db.tensor, 
-        LOG einstein_notation_tensor1_db.at(indices) NEAR einstein_notation_tensor1.at(indices) NEAR "" DONE
+    FOREACH(i, indices, IN_TENSOR, einstein_notation_tensorprod_db.tensor, 
+        LOG einstein_notation_tensorprod_db.at(indices) ALSO " " DONE
+        if(i%3 == 2) LOG "\n" DONE
     )
      return 0;
 
