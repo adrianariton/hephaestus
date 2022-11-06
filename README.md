@@ -114,7 +114,7 @@ You can call them using the name preceded by **DEFN_**:
     LET m2_mak = __(m2vals, MATRIX_3X3) DONE
     LET m1m2 = DEFN_matrixprod(m1_mak, m2_mak) DONE
 ```
-[See about the __ macro [here](#The-__-and-__m-macros-and-the-HEPH-language)]
+[Read about the "__" macro [here](#The-__-and-__m-macros-and-the-HEPH-language)]
 
 
 In this case Einstein notation is used and HEPHAESTUS provides an easy macro to convert from tensors to einstein notations and viceversa. It also provides an easy way to loop through array-like objects using a macro-based language included in the **Heph_Utils.h** header.
@@ -150,3 +150,24 @@ For example the [( * )](#HTensor-and-HShape) codebox is the same as
 ```cpp
     HEinsteinNotation<long double> einstein_notation_tensorprod = __m(tensor1, "^alpha_beta", tensor2, "^beta_gamma");
 ```
+
+# HPoly and QPOLY
+
+As the name suggest, they are polynomial classes, the last one representing Rational Polynomials. 
+QPOLY represents a sortcut macro for HPoly<HRational>.
+
+One can integrate a rational function (formed by taking the raport of two ratioal polynomials) as such:
+
+```cpp
+    QPOLY PF = multipleroot(5_frac, 3) * multipleroot(1_frac, 4)  * multipleroot(3_frac, 1) ;
+    QPOLY PG = QPOLY({-3, 0, 1});
+    LOG QPOLY::integrate_polyfrac(PG, PF) DONE
+
+```
+where the **_frac** suffix operator returns HRational fraction with denominator 1.
+*integrate_polyfrac* returns a string which has the full function. It might not work for polynomials with non-real solutions.
+
+A future update will contain
+- Advanced solution finding algorithms for polynomials
+- Advanced solution finding for simple functions
+- Advanced integration
