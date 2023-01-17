@@ -194,7 +194,7 @@ inline namespace big{
     }
 }
 /**
- * @brief Bad precision and functions take a lot, most are written without regard to performance, using taylor series centered around 0. I kept them just as an alternative, but it's best to use big_cordic:: namespace for quick fast and reliable calculations!
+ * @brief Bad precision and functions take a lot, most are written without regard to performance, using taylor series centered around 0. I kept them just as an alternative, but it's best to use big:: namespace for quick fast and reliable calculations!
  * 
  */
 inline namespace brute{
@@ -343,9 +343,9 @@ inline namespace brute{
         }
         bigreal _a = brute::ln(__x) * __e;
         if(DOUBLE_THE_FUN)
-            roundTo(_a, 2*BN_DEC_INVEXPPRECISION);
+            big::roundTo(_a, 2*BN_DEC_INVEXPPRECISION);
         else 
-            roundTo(_a, BN_DEC_INVEXPPRECISION);
+            big::roundTo(_a, BN_DEC_INVEXPPRECISION);
         return brute::exp(_a);
     }
     /**
@@ -360,7 +360,7 @@ inline namespace brute{
             return bigreal("1");
         }
         bigreal _h = pown(__x, __e);
-        bigreal _left = __e - floor(__e);
+        bigreal _left = __e - big::floor(__e);
 
         if(BN_MESSAGES)
             std::cout<<"\nNat exp:"<<_h<<"\nleft:"<<_left<<"\n\n";
@@ -385,7 +385,7 @@ inline namespace brute{
             return bigreal("1");
         }
         bigreal _h = pown(__x, __e);
-        bigreal _left = __e - floor(__e);
+        bigreal _left = __e - big::floor(__e);
 
         if(BN_MESSAGES)
             std::cout<<"\nNat exp:"<<_h<<"\nleft:"<<_left<<"\n\n";
@@ -397,9 +397,9 @@ inline namespace brute{
 
         //exp(_expl) * _h
 
-        bigreal _hl = pown(roundedTo(BIG_E, BN_DEC_INVEXPPRECISION), _expl);
-        bigreal _expll = _expl - floor(_expl);
-        roundTo(_expll, BN_DEC_INVEXPPRECISION);
+        bigreal _hl = pown(big::roundedTo(BIG_E, BN_DEC_INVEXPPRECISION), _expl);
+        bigreal _expll = _expl - big::floor(_expl);
+        big::roundTo(_expll, BN_DEC_INVEXPPRECISION);
         if(BIG_ROUND_EXPFUNCTIONS_RESULTS_TO_RN){
             
             return (_h * _hl * brute::exp(_expll)).roundToDecimal(BIG_RN);
@@ -419,7 +419,7 @@ inline namespace brute{
             return bigreal("1");
         }
         bigreal _h = pown(__x, __e);
-        bigreal _left = __e - floor(__e);
+        bigreal _left = __e - big::floor(__e);
 
         if(BN_MESSAGES)
             std::cout<<"\nNat exp:"<<_h<<"\nleft:"<<_left<<"\n\n";
@@ -429,11 +429,11 @@ inline namespace brute{
         }
 
         bigreal _expl = brute::ln(__x) * _left;
-        bigreal _hl = pown(roundedTo(BIG_E, BN_DEC_EXPPRECISION), _expl);
+        bigreal _hl = pown(big::roundedTo(BIG_E, BN_DEC_EXPPRECISION), _expl);
         
-        bigreal _expll = _expl - floor(_expl);
+        bigreal _expll = _expl - big::floor(_expl);
        
-        roundTo(_expll, BN_DEC_INVEXPPRECISION);
+        big::roundTo(_expll, BN_DEC_INVEXPPRECISION);
         if(BN_MESSAGES)
             std::cout<<"\n\nleft to calc:"<<_expll<<"\n\n";
         return (_h * _hl * expdq(_expll));

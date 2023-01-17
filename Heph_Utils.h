@@ -68,7 +68,7 @@ typedef long double REAL;
         using namespace namespace_name; \
         __VA_ARGS__ \
     } 
-#define REAL100_FNS big_cordic
+#define REAL100_FNS big
 #define COMPLEX100_FNS heph_complex
 #define FUNC_FNS mvef
 #define GET ::

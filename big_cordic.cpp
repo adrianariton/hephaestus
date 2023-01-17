@@ -1091,7 +1091,7 @@ inline const bool BCORDIC_USEBINARY = true;
  * @brief CORDIC algorithms
  * 
  */
-inline namespace big_cordic{
+inline namespace big{
 
     #ifndef BCORDIC_BASE_400
     /**
@@ -1463,7 +1463,7 @@ inline namespace big_cordic{
 
         bigreal _atan, _hyp;
     
-        big_cordic::calc_CAU_arctan(a_cau, _atan,  _hyp);
+        big::calc_CAU_arctan(a_cau, _atan,  _hyp);
         out_atan = _atan;
         out_atan =_atan * BIG_1_2EX_BASE * BIG_PI * BIG_HALF;
         out_hyp = _hyp*BCORDIC_SQRTHYP_FAC*BIG_1_2EX_BASE;
@@ -1547,7 +1547,7 @@ inline namespace big_cordic{
 
         bigreal _atan, _hyp;
     
-        big_cordic::calc_CAU_arctanh(a_cau, _atan,  _hyp);
+        big::calc_CAU_arctanh(a_cau, _atan,  _hyp);
         out_atanh = _atan;
         out_atanh =_atan * BIG_1_2EX_BASE;
         out_hyp = _hyp*BCORDIC_SQRTMHYP_FAC*BIG_1_2EX_BASE;
@@ -1626,7 +1626,7 @@ inline namespace big_cordic{
 
         bigreal _ln, _sqrt;
     
-        big_cordic::calc_CAU_lnsqrt(a_cau, _ln,  _sqrt);
+        big::calc_CAU_lnsqrt(a_cau, _ln,  _sqrt);
         out_ln =_ln * BIG_1_2EX_BASE;
         out_sqrt = _sqrt*BCORDIC_SQRTMHYP_FAC*BIG_1_2EX_BASE;
     }
@@ -1635,12 +1635,12 @@ inline namespace big_cordic{
     inline bigreal exp(bigreal __n){
 
         if(__n.isNegative){
-            return BIG_ONE/big_cordic::exp(__n.abs()).roundToDecimal(BN_DEC_INVEXPPRECISION);
+            return BIG_ONE/big::exp(__n.abs()).roundToDecimal(BN_DEC_INVEXPPRECISION);
         }
         bigreal floor_ = big::floor(__n);
         bigreal frac = __n - floor_;
         bigreal ex_frac, sinh_frac, cosh_frac;
-        big_cordic::calc_sinhcosh(frac, sinh_frac, cosh_frac);
+        big::calc_sinhcosh(frac, sinh_frac, cosh_frac);
         ex_frac = sinh_frac + cosh_frac;
 
         bigreal pown_ = brute::pown(BIG_E, floor_);
@@ -1668,7 +1668,7 @@ inline namespace big_cordic{
         }
         // __n = __reduced * 10^pow10, where __reduced is between [0.9, 9]
         bigreal o_ln, o_sq;
-        big_cordic::calc_lnsqrt(__reduced, o_ln, o_sq);
+        big::calc_lnsqrt(__reduced, o_ln, o_sq);
 
         return (o_ln + bigreal(std::to_string(pow10)) * BIG_LN10);
 
@@ -1681,20 +1681,20 @@ inline namespace big_cordic{
             if(flb == b){
                 return brute::pown(a, flb);
             }
-            return big_cordic::exp((frb * big_cordic::ln(a))).roundToDecimal(FLOATING_POINT_DEC_PREC) * brute::pown(a, flb);
+            return big::exp((frb * big::ln(a))).roundToDecimal(FLOATING_POINT_DEC_PREC) * brute::pown(a, flb);
         }
-        return big_cordic::exp(b * big_cordic::ln(a));
+        return big::exp(b * big::ln(a));
     }
 
     inline bigreal sin(bigreal a){
         bigreal __resin, __recos;
-        big_cordic::calc_sincos(a, __resin, __recos);
+        big::calc_sincos(a, __resin, __recos);
         return __resin;
     }
 
     inline bigreal cos(bigreal a){
         bigreal __resin, __recos;
-        big_cordic::calc_sincos(a, __resin, __recos);
+        big::calc_sincos(a, __resin, __recos);
         return __recos;
     }
 }     

@@ -106,7 +106,7 @@ BinaryBNint BinaryBNint::subsPositives(const BinaryBNint lhs, const BinaryBNint 
         it_h--;
         it_rhs--;
     }
-    while(res.at(0) == '0'){
+    while(res.at(0) == '0' && res.size() > 1){
         res.erase(0,1);
 
     }

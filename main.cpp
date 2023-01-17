@@ -12,6 +12,8 @@
 #include <iomanip>
 #include <fstream>
 #include <algorithm>
+#include <utility>    
+
 
 #include <chrono>
 
@@ -36,6 +38,15 @@ long double beautiful(long double __x){
 }
 
 char expr[] = "x^2-7*x+3+3*x_n + x_n";
+
+
+void foo(int& ref){
+    std::cout<<"reff: int&: "<<ref<<"\n";
+}
+
+void foo(int&& ref){
+    std::cout<<"ref: int&&: "<<ref<<"\n";
+}
 
 int main() {
 
@@ -102,7 +113,7 @@ int main() {
     bigreal ccs, ccc, catan;
 
     auto start = high_resolution_clock::now();
-    big_cordic::bin_calc_sincos(bdqs, ccs, ccc);
+    big::bin_calc_sincos(bdqs, ccs, ccc);
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
     cout << "\nTime taken by function SIN-COS: "
@@ -110,7 +121,7 @@ int main() {
     cout<<"\n\nsin:"<<ccs<<"\ncos:"<<ccc<<"\n\n";
 
     start = high_resolution_clock::now();
-    big_cordic::calc_sinhcosh(bdqs, ccs, ccc);
+    big::calc_sinhcosh(bdqs, ccs, ccc);
     stop = high_resolution_clock::now();
     duration = duration_cast<microseconds>(stop - start);
     cout << "\nTime taken by function SINH-COSH: "
@@ -119,7 +130,7 @@ int main() {
 
     bigreal chyp;
     start = high_resolution_clock::now();
-    big_cordic::calc_arctan(bdqs, catan, chyp);
+    big::calc_arctan(bdqs, catan, chyp);
     stop = high_resolution_clock::now();
     duration = duration_cast<microseconds>(stop - start);
     cout << "\nTime taken by function ATANH: "
@@ -129,17 +140,17 @@ int main() {
 
 
     bigreal catanh, chyph;
-    big_cordic::calc_arctanh(bigreal("0.8"), catanh, chyph);
+    big::calc_arctanh(bigreal("0.8"), catanh, chyph);
     cout<<"\nATANH:"<<catanh<<"\nhyph:"<<chyph<<"\n";
 
     bigreal cln, csqrt;
-    big_cordic::calc_lnsqrt(bigreal("9"), cln, csqrt);
+    big::calc_lnsqrt(bigreal("9"), cln, csqrt);
     cout<<"\n\nLN:"<<cln<<"\nsqrt:"<<csqrt<<"\n";
 
 
     cout<<"\n\n";
 
-    cout<<"\n\n"<<"-----------------------Math S    ymbolic String expression evaluator-----------------------";
+    cout<<"\n\n"<<"-----------------------Math Symbolic String expression evaluator-----------------------";
 
     EXV_COUT_TYPES = true;
     mve myexp = mve("u^(u+6*x)+ln(x*u)");
@@ -165,9 +176,9 @@ int main() {
     BNcomplex z1(bigreal("5"), bigreal("2"));
     cout<<z/z1<<"\n\n";
     cout<<hcomp::polar_coords(z);     
-    cout<<"\n\n"<<big_cordic::pow(bigreal("3"), bigreal("2"));
-    cout<<"\n\n"<<big_cordic::exp(bigreal("0.7"));
-    cout<<"\n\nIEEE check: "<<big_cordic::pow(bigreal("10.12122"), bigreal("30.3421"));
+    cout<<"\n\n"<<big::pow(bigreal("3"), bigreal("2"));
+    cout<<"\n\n"<<big::exp(bigreal("0.7"));
+    cout<<"\n\nIEEE check: "<<big::pow(bigreal("10.12122"), bigreal("30.3421"));
     
 
     cout<<"\n\n--------GREEK--------\n\n";
@@ -471,7 +482,12 @@ int main() {
         LOG einstein_notation_tensorprod_db.at(indices) ALSO " " DONE
         if(i%3 == 2) LOG "\n" DONE
     )
-     return 0;
+
+
+     
+
+     
+    return 0;
 
 }
 

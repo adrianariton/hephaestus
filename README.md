@@ -9,22 +9,23 @@ Requirements:
 - g++ and gcc compilers
 
 ## BN - Big Numbers. 
-Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the **big_cordic::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace
-In a future update, they will all be included in the same namespace!
+Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the **big::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace in the big.cpp file.
+~~In a future update, they will all be included in the same namespace!~~
+*UPDATE: 21 DEC merged big and big_cordic*
 
 Using the **BNdecimal** (aka **bigreal**) type:
 ```cpp
     #include "hephaestus.cpp"
     // ...
     bigreal a("3.14"), b("2.33");
-    bigreal sin_a = big_cordic::sin(a);
-    bigreal a_pow_b = big_cordic::pow(a, b);
-    bigreal ln_a = big_cordic::ln(a);
-    bigreal exp_a = big_cordic::exp(a);
+    bigreal sin_a = big::sin(a);
+    bigreal a_pow_b = big::pow(a, b);
+    bigreal ln_a = big::ln(a);
+    bigreal exp_a = big::exp(a);
 
     bigreal arctan_a, hyp_a;
-    big_cordic::calc_arctan(a, arctan_a, hyp_a);
-    bigreal floor_a = big::floor(a); // used big::, because the floor function does not need high accuracy cordic computation
+    big::calc_arctan(a, arctan_a, hyp_a);
+    bigreal floor_a = big::floor(a);
     bigreal ab_sum = a + b, ab_prod = a * b, ab_div = a / b;
 ```
 
@@ -63,7 +64,7 @@ One can also declare **BNComplex** numbers (aka bigcomplex) and use the **hcomp*
 ```
 
 ### The **brute** namespace
-The **brute** namespace consists of rough estimates of functions and is only for experimental purposes. It should not be used in practice, because the **big_cordic** namespace works much faster and has much more precision (100 digits).
+The **brute** namespace consists of rough estimates of functions and is only for experimental purposes. It should not be used in practice, because the **big** namespace works much faster and has much more precision (100 digits).
 
 
 ## H - Hephaestus More

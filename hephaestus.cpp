@@ -11,19 +11,19 @@
 namespace heph
 {
     inline bigreal sin(bigreal x){
-        return big_cordic::sin(x);
+        return big::sin(x);
     }
     inline bigreal cos(bigreal x){
-        return big_cordic::cos(x);
+        return big::cos(x);
     }
     inline bigreal exp(bigreal x){
-        return big_cordic::exp(x);
+        return big::exp(x);
     }
     inline bigreal ln(bigreal x){
-        return big_cordic::ln(x);
+        return big::ln(x);
     }
     inline bigreal pow(bigreal x, bigreal y){
-        return big_cordic::pow(x, y);
+        return big::pow(x, y);
     }
 } // namespace heph
 

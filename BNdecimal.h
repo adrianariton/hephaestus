@@ -67,7 +67,7 @@ inline int BN_COUT_SETPREC = 100;
 inline bool DOUBLE_THE_FUN = true;
 
 /**
- * @brief Do not use the functions (non static ones) in this class if you want floating point precision. Use the ones in the big_cordic:: namespace instead
+ * @brief Do not use the functions (non static ones) in this class if you want floating point precision. Use the ones in the big:: namespace instead
  * 
  */
 class BNdecimal{
