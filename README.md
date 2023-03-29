@@ -8,6 +8,8 @@ Requirements:
 - CMake extensions (VScode)
 - g++ and gcc compilers
 
+# TODO:
+- Paralelize (if possible) tensorial operations and CORDIC implementations. [HTensor.h](HTensor.r)
 
 ## BN - Big Numbers. 
 Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the **big::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace in the big.cpp file.

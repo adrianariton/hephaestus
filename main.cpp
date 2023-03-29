@@ -1,34 +1,55 @@
 #include "hephaestus.cpp"
 #include "Heph_Utils.h"
 
+/**
+ * Use
+    #include "hephaestus.cpp"
+    #include "Heph_Utils.h"
+ * if you work in the same folder
+*/
+
 USE_HEPHAESTUS_CPP
 using namespace std;
 
-
-
 int main() {
+    LET A = TENSOR(bigreal)({1, 2, 3, 
+                             4, 5, 6,
+                             7, 1, 0}, MATRIX_3X3) DONE
+    LET B = TENSOR(bigreal)({0, 1, 1,
+                             1, 1, 1,
+                             0, 1, 0}, MATRIX_3X3) DONE
 
-    bigreal cs, cc, bdqs("0.725");
-    bigreal ccs, ccc, catan;
+    LET A_einstein = __(A, "^alpha_beta") DONE
+    LET B_einstein = __(B, "^beta_gamma") DONE
 
-    big::bin_calc_sincos(bdqs, ccs, ccc);
-    cout<<"\n\nsin:"<<ccs<<"\ncos:"<<ccc<<"\n\n";
+    LET AxB_matrix_prod = __m(A_einstein, B_einstein) DONE
+    
+    LOG "Tensor matrix product:\n" DONE
+    FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
+        LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
+    )
 
-    big::calc_sinhcosh(bdqs, ccs, ccc);
-    cout<<"\n\nsinh:"<<ccs<<"\ncosh:"<<ccc<<"\n\n";
+    LOG_ALONE("")
 
-    bigreal chyp;
-    big::calc_arctan(bdqs, catan, chyp);
-    cout<<"\n\natan:"<<catan;
-    cout<<"\nhyp:"<<chyp.roundToDecimal(5);
+    // OR JUST DO
+    AxB_matrix_prod = __m(A, "^alpha_beta", B, "^beta_gamma") DONE
+    LOG "Same tensor matrix product:\n" DONE
 
+    FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
+        LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
+    )
 
-    bigreal catanh, chyph;
-    big::calc_arctanh(bigreal("0.8"), catanh, chyph);
-    cout<<"\nATANH:"<<catanh<<"\nhyph:"<<chyph<<"\n";
+    LOG_ALONE("")
 
-    bigreal cln, csqrt;
-    big::calc_lnsqrt(bigreal("9"), cln, csqrt);
-    cout<<"\n\nLN:"<<cln<<"\nsqrt:"<<csqrt<<"\n";
+    // OR DEFINE A PRODUCT
+    DEF_TENSOR_PRODUCT_TO_INDEXED_TENSOR(matrixprod, bigreal, _x, "^alpha_beta", _y, "^beta_gamma", _x.dim() == 2 && _y.dim() == 2);
 
+    AxB_matrix_prod = DEFN_matrixprod(A, B) DONE
+    LOG "Same tensor matrix product but defined:\n" DONE
+
+    FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
+        LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
+    )
+
+    return 0;
 }
