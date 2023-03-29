@@ -1,3 +1,10 @@
+/**
+ * Paralelizable and possible paralelizable lines of code
+ * have been marked with `#para` or `#para?`
+ * 
+ * 
+*/
+
 #ifndef HTENSORS_H
 #define HTENSORS_H
 
@@ -115,6 +122,7 @@ class HTensor{
         HTensor(std::vector< HTensor<T> > _subTensors){
             int n_dim = _subTensors.at(0).space_nd;
 
+            // #para
             for(size_t i = 0; i<_subTensors.size(); ++i){
                 if(n_dim != _subTensors.at(i).space_nd)
                     throw std::invalid_argument("Conflicting Tensor shapes cannot be merged into a new Tensor");
@@ -138,6 +146,8 @@ class HTensor{
         // }
         HTensor<T> operator[] (std::vector<int> _position){
             HTensor<T> __buff = (*this);
+
+            // #para
             for(int i=0;i<_position.size(); ++i){
                 __buff = __buff[_position.at(i)];
             }
@@ -203,6 +213,8 @@ class HTensor{
 
         int coord_on_axis_i(int i, int nthpos, std::vector<int> __measures){
             int __pim1 = 1;
+
+            // #para?
             for(int it=0; it< (i); ++it){
                 __pim1 *= __measures.at(it);
                 
@@ -215,6 +227,8 @@ class HTensor{
             if(__measures.size() == 0)
                 return std::vector<int>({});
             std::vector<int> __bar;
+
+            // #para?
             for(int i=0; i< (*this).dim(); ++i){
                 __bar.push_back(coord_on_axis_i(i, index, __measures));
             }
@@ -254,6 +268,7 @@ class HTensor{
             HShape __prodshape(__prodshape_vec);
             std::vector<T> _repl, _donc;
             
+            // #para
             for(int i=0; i< __prodshape.signature(); ++i){
                 _repl.push_back( (T)(0) );
             }
@@ -307,6 +322,8 @@ class HEinsteinNotation{
     }
     HEinsteinNotation lower_index(std::string to_lower, std::string new_name){
         HEinsteinNotation _h = (*this);
+
+        // #para
         for(int i=0; i<_h.indices.size(); ++i){
             if(_h.indices.at(i) == to_lower && _h.is_up.at(i) == true){
                 _h.is_up.at(i) = false;
@@ -317,6 +334,7 @@ class HEinsteinNotation{
     }
     HEinsteinNotation raise_index(std::string to_raise, std::string new_name){
         HEinsteinNotation _h = (*this);
+        // #para
         for(int i=0; i<_h.indices.size(); ++i){
             if(_h.indices.at(i) == to_raise && _h.is_up.at(i) == false){
                 _h.is_up.at(i) = true;
@@ -353,6 +371,7 @@ class HEinsteinNotation{
 
         HTensor<T> _res_tensor(vals_for_res, HShape(vek_tensorshape) );
 
+        // #para?
         for(int i=0; i<HShape(vek_tensorshape).signature(); ++i){
             std::vector<int> coords_in_res = _res_tensor.coords_forindex(i, vek_tensorshape);
             std::vector<int> coords_in_old = coords_in_res;
@@ -397,6 +416,7 @@ class HEinsteinNotation{
     }
     static HEinsteinNotation reduce(HEinsteinNotation tens_en){
         int sw=0;
+        // #para
         for(int i=0; i < tens_en.indices.size(); ++i){
                 for(int j=0; j < tens_en.indices.size(); ++j){
                     if(tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
@@ -405,9 +425,10 @@ class HEinsteinNotation{
                 }
             
         }
-        
+
         if(sw == 0) return tens_en;
         int qi=-1, qj=-1;
+        // #para
         for(int i=0; i < tens_en.indices.size(); ++i){
                 for(int j=0; j < tens_en.indices.size(); ++j){
                     if( tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
@@ -424,6 +445,8 @@ class HEinsteinNotation{
     }
     static HEinsteinNotation to_upper(HEinsteinNotation entens, std::vector<int>& indices_to_lower){
         indices_to_lower = {};
+
+        // #para
         for(int i=0; i<entens.indices.size(); ++i){
             if(!entens.is_up.at(i)){
                 entens.raise_index( entens.indices.at(i) , entens.indices.at(i));
@@ -441,6 +464,8 @@ class HEinsteinNotation{
 
         if(indices_to_lwr.size() == 0) return entens.tensor.at(corresp_coord).val();
         T val = 0;
+
+        // #para - recursive fork +- finish
         for(int i=0; i<indices_to_lwr.size(); ++i){
             int index_to_lwr = indices_to_lwr.at(i);
             std::string index_name = entens.indices.at(index_to_lwr);
