@@ -5,14 +5,9 @@ Hephaestus++ is a mathematical tool which has many components: FCO, BN and H(eph
 Hephaestus can be built with CMake.
 
 Requirements:
-- CMake extensions (VScode) or Makefile
+- CMake extensions (VScode)
 - g++ and gcc compilers
 
-Run with makefile on linux:
-```bash
-    make
-    ./MathBase
-```
 
 ## BN - Big Numbers. 
 Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the **big::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace in the big.cpp file.
