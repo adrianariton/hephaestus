@@ -3,6 +3,8 @@
 #include <unistd.h>
 // g++-11 -fopenmp forker_test.cpp -o forker
 #define THREAD_NUM 4
+/*
+
 int main()
 {
     omp_set_num_threads(THREAD_NUM); // set number of threads in "parallel" blocks
@@ -16,3 +18,4 @@ int main()
     }
     return 0;
 }
+*/

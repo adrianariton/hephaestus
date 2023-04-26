@@ -1,6 +1,6 @@
 # HEPHAESTUS++
 
-Hephaestus++ is a mathematical tool which has many components: FCO, BN and H(eph). It is used for high precision calculation and tensor mathematics as well as function aproximations.
+**Hephaestus++** is a mathematical tool which has many components: `FCO`, `BN` and `H(eph)`. It is used for high precision calculation and tensor mathematics as well as function aproximations.
 
 Hephaestus can be built with CMake.
 
@@ -9,10 +9,11 @@ Requirements:
 - g++ and gcc compilers
 
 # TODO:
-- Paralelize (if possible) tensorial operations and CORDIC implementations. [HTensor.h](HTensor.h)
+- [ ] Paralelize (if possible) tensorial operations and CORDIC implementations. [HTensor.h](HTensor.h)
+- [ ] Rewrite foreach function and create Itreable interface
 
 ## BN - Big Numbers. 
-Big Numbers includes big real numbers, big ints and big binary ints and works head to toe with the **big::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace in the big.cpp file.
+Big Numbers includes `big real numbers`, `big ints` and `big binary ints` and works head to toe with the **big::** namespace which contains all the trig, inverse trig and hyperbolic functions, but also a quick exponential and others. Some of the basic functions (*floor*, *abs*, *to_decimal*, *to_binary* etc) will be found in the **big::** namespace in the big.cpp file.
 ~~In a future update, they will all be included in the same namespace!~~
 *UPDATE: 21 DEC merged big and big_cordic*
 
@@ -129,6 +130,8 @@ In this case Einstein notation is used and HEPHAESTUS provides an easy macro to 
     )
 ```
 
+### The Einstein Notation facilitates contraction along one or multiple dimensions!
+
 # The __ and __m macros and the HEPH language
 #### As you saw before HEPHAESTUS++ also comes with a simplified macro-language. We will now look through the most important thigs you can do with this language.
 ## "__"
@@ -172,7 +175,13 @@ where the **_frac** suffix operator returns HRational fraction with denominator 
 
 *integrate_polyfrac* returns a string which has the full function. It might not work for polynomials with non-real solutions.
 
-A future update will contain
+## Future of Hephaestus
+
+
+Hephaestus aims to be able to handle large data, and to be used for model training.
+
+### A future update will contain
 - Advanced solution finding algorithms for polynomials
 - Advanced solution finding for simple functions
 - Advanced integration
+- Parralelization and grouping for tensors, as well as naming dimensions
