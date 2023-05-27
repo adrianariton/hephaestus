@@ -1,5 +1,6 @@
 #include "hephaestus.cpp"
 #include "Heph_Utils.h"
+#include "athena.h"
 
 /**
  * Use
@@ -13,8 +14,12 @@ using namespace std;
 
 int main() {
     // QPOLY := HPoly<FRAC> 
-    QPOLY PF = multipleroot(5_frac, 3) * multipleroot(1_frac, 4)  * multipleroot(3_frac, 1) ;
-    QPOLY PG = QPOLY({-3, 0, 1});
-    LOG QPOLY::integrate_polyfrac(PG, PF) DONE
+    auto y = [] (long double x)
+    {
+        return 14 * x * exp(x - 2) - 12 * exp(x - 2) - 7 * x *x*x+ 20 * x*x - 26 * x + 12;
+    };
+
+    long double t = ath_quads_adaptive(y, (long double)10., (long double)20., (long double)0.0001);
+    cout << t;
     return 0;
 }

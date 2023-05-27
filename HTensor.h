@@ -65,6 +65,7 @@ class HShape{
         int dim();
         int signature();
 };
+
 template <typename T>
 class HTensor{
     private:
@@ -436,8 +437,6 @@ class HEinsteinNotation{
                         qj = j;
                     }
                 }
-
-           
         }
 
         return HEinsteinNotation::reduce( tens_en.fix_index_to_index(qi, qj) );
