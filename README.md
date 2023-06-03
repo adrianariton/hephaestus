@@ -24,7 +24,7 @@ Run without CMake:
 ```
 
 # TODO:
-- [ ] Paralelize (if possible) tensorial operations and CORDIC implementations. [HTensor.h](HTensor.h)
+- [ ] Paralelize (if possible) tensorial operations and CORDIC implementations. [hephaestus/HTensor.h](hephaestus/HTensor.h)
 - [ ] Rewrite foreach function and create Itreable interface
 - [ ] Add large ranging functions for CORDIC
 - [ ] Athena and HTensor separate lib: athena
