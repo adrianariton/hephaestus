@@ -143,6 +143,11 @@ inline HEinsteinNotation<T> _heph_predef_multiply(const T& lhs, const HEinsteinN
     return (HEinsteinNotation<T>(HTensor<T>(lhs), {}, {})  *  rhs );
 }
 
+template<typename T>
+inline T _heph_predef_multiply(T lhs, T rhs){
+    return lhs * rhs;
+}
+
 inline auto METRIC_Minkowski = [](int x, int y){
     if(x==0 && y==0) return -1;
     return int(x==y);

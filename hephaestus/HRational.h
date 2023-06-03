@@ -28,7 +28,7 @@ class HRational{
                 A = -A;
                 q = true;
             }
-            long long int gc = std::__gcd(A, D);
+            long long int gc = std::gcd(A, D);
             A = A / gc;
             D = D / gc;
             if(q){

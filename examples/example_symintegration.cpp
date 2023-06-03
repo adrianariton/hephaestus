@@ -1,5 +1,5 @@
-#include "../hephaestus.cpp"
-#include "../Heph_Utils.h"
+#include "../hephaestus/hephaestus.cpp"
+#include "../hephaestus/Heph_Utils.h"
 
 /**
  * Use

@@ -1,6 +1,12 @@
-#include "hephaestus.cpp"
-#include "Heph_Utils.h"
-#include "athena.h"
+
+#include <cmath>
+#include <iostream>
+#include "athena/athena.h"
+
+
+#include "hephaestus/hephaestus.cpp"
+#include "hephaestus/Heph_Utils.h"
+
 
 /**
  * Use
@@ -13,13 +19,46 @@ USE_HEPHAESTUS_CPP
 using namespace std;
 
 int main() {
-    // QPOLY := HPoly<FRAC> 
-    auto y = [] (long double x)
-    {
-        return 14 * x * exp(x - 2) - 12 * exp(x - 2) - 7 * x *x*x+ 20 * x*x - 26 * x + 12;
-    };
+    LET A = TENSOR(bigreal)({1, 2, 3, 
+                             4, 5, 6,
+                             7, 1, 0}, MATRIX_3X3) DONE
+    LET B = TENSOR(bigreal)({0, 1, 1,
+                             1, 1, 1,
+                             0, 1, 0}, MATRIX_3X3) DONE
 
-    long double t = ath_quads_adaptive(y, (long double)10., (long double)20., (long double)0.0001);
-    cout << t;
+    LET A_einstein = __(A, "^alpha_beta") DONE
+    LET B_einstein = __(B, "^beta_gamma") DONE
+
+    LET AxB_matrix_prod = __m(A_einstein, B_einstein) DONE
+    
+    LOG "Tensor matrix product:\n" DONE
+    FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
+        LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
+    )
+
+    LOG_ALONE("")
+
+    // OR JUST DO 
+    AxB_matrix_prod = __m(A, "^alpha_beta", B, "^beta_gamma") DONE
+    LOG "Same tensor matrix product:\n" DONE
+
+    FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
+        LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
+    )
+
+    LOG_ALONE("")
+
+    // OR DEFINE A PRODUCT
+    DEF_TENSOR_PRODUCT_TO_INDEXED_TENSOR( matrixprod, bigreal, _x, "^alpha_beta", _y, "^beta_gamma", _x.dim() == 2 && _y.dim() == 2);
+
+    AxB_matrix_prod = DEFN_matrixprod(A, B) DONE
+    LOG "Same tensor matrix product but defined:\n" DONE
+
+    FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
+        LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
+    )
+    LOG_ALONE("")
+    LOG __m(2, 34) DONE
+
     return 0;
 }

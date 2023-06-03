@@ -1,6 +1,6 @@
 #include <iostream>
-#include "omp.h" // ln -s /opt/homebrew/Cellar/libomp/16.0.0/include/omp.h omp.h
-#include <unistd.h>
+//#include "omp.h" // ln -s /opt/homebrew/Cellar/libomp/16.0.0/include/omp.h omp.h//
+//#include <unistd.h>
 // g++-11 -fopenmp forker_test.cpp -o forker
 #define THREAD_NUM 4
 /*
