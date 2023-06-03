@@ -184,6 +184,15 @@ class HTensor{
             return (this->children()).at(0);
         }
 
+        template <typename FLAMBDA>
+        static HTensor<T> random_distribution(FLAMBDA& random, HShape _shape) {
+            std::vector<T> vals(_shape.signature());
+            for (auto& item : vals) {
+                item = random();
+            }
+            return HTensor(vals, _shape);
+        }
+
         friend std::ostream& operator <<(std::ostream& os, HTensor<T> _tensor){
             if(_tensor.dim() == 0)
                 os<<" "<<_tensor.val()<<" ";
@@ -357,6 +366,7 @@ class HEinsteinNotation{
 
         deleteAll_vek(indices_of_new, {(int)to_fix_ind, (int)to_index_ind});
 
+
         std::vector<int> vek_tensorshape = tensor_shape.axi_ilen;
         int size_of_contracted_dim = -1;
         if(vek_tensorshape.at(to_fix_ind) != vek_tensorshape.at(to_index_ind))
@@ -371,34 +381,43 @@ class HEinsteinNotation{
         }
 
         HTensor<T> _res_tensor(vals_for_res, HShape(vek_tensorshape) );
+        //std::cout<<"deleteAll_vek"<<"\n";//debug
 
         // #para?
         for(int i=0; i<HShape(vek_tensorshape).signature(); ++i){
+            // TODO: Replace this line with simply increment (I don't know what i was thinking)
             std::vector<int> coords_in_res = _res_tensor.coords_forindex(i, vek_tensorshape);
+
+
             std::vector<int> coords_in_old = coords_in_res;
 
             if(to_fix_ind > to_index_ind){
                 std::swap(to_fix_ind, to_index_ind);
             }
-             if(to_fix_ind > coords_in_old.size())
-                 coords_in_old.push_back(0), to_fix_ind = coords_in_old.size()-1;
-             else
-                 coords_in_old.insert(coords_in_old.begin() + to_fix_ind, 0);
-        
-             if(to_index_ind > coords_in_old.size())
-                 coords_in_old.push_back(0), to_index_ind = coords_in_old.size() - 1;
-             else
-                 coords_in_old.insert(coords_in_old.begin() + to_index_ind, 0);
+
+            if(to_fix_ind > coords_in_old.size())
+                coords_in_old.push_back(0), to_fix_ind = coords_in_old.size()-1;
+            else
+                coords_in_old.insert(coords_in_old.begin() + to_fix_ind, 0);
+    
+            if(to_index_ind > coords_in_old.size())
+                coords_in_old.push_back(0), to_index_ind = coords_in_old.size() - 1;
+            else
+                coords_in_old.insert(coords_in_old.begin() + to_index_ind, 0);
 
             if(_res_tensor.at(coords_in_res).val() == (T)(0))
+
+            // #para , clearly:)
             for(int _si = 0; _si<size_of_contracted_dim; ++_si){
 
                 coords_in_old.at(to_fix_ind) = _si;
 
                 coords_in_old.at(to_index_ind) = _si;
 
+                // ref
                 T _thisval = (*this).at(coords_in_old);
                 HTensor<T> _aux = HTensor<T>(_res_tensor.at(coords_in_res).val() + (*this).at(coords_in_old));
+                // ref
                 _res_tensor.at(coords_in_res) = _aux;
             }
         }
@@ -419,11 +438,11 @@ class HEinsteinNotation{
         int sw=0;
         // #para
         for(int i=0; i < tens_en.indices.size(); ++i){
-                for(int j=0; j < tens_en.indices.size(); ++j){
-                    if(tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
-                        sw=1;
-                    }
+            for(int j=0; j < tens_en.indices.size(); ++j){
+                if(tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
+                    sw=1;
                 }
+            }
             
         }
 
@@ -431,13 +450,15 @@ class HEinsteinNotation{
         int qi=-1, qj=-1;
         // #para
         for(int i=0; i < tens_en.indices.size(); ++i){
-                for(int j=0; j < tens_en.indices.size(); ++j){
-                    if( tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
-                        qi = i;
-                        qj = j;
-                    }
+            for(int j=0; j < tens_en.indices.size(); ++j){
+                if( tens_en.is_up.at(i) && !tens_en.is_up.at(j) && tens_en.indices.at(i) == tens_en.indices.at(j)){
+                    qi = i;
+                    qj = j;
                 }
+            }
         }
+
+        //std::cout<<qi<<" "<<qj<<'\n'; // debug
 
         return HEinsteinNotation::reduce( tens_en.fix_index_to_index(qi, qj) );
 
@@ -510,6 +531,7 @@ class HEinsteinNotation{
 
     static HEinsteinNotation tens_multiply(HEinsteinNotation lhs, HEinsteinNotation rhs){
         HEinsteinNotation tprod = HEinsteinNotation::tens_product(lhs, rhs);
+        //std::cout<<"DONEE\n";
         return HEinsteinNotation::reduce(tprod);
     }
 

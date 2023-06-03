@@ -50,6 +50,7 @@ int main() {
 
     // OR DEFINE A PRODUCT
     DEF_TENSOR_PRODUCT_TO_INDEXED_TENSOR( matrixprod, bigreal, _x, "^alpha_beta", _y, "^beta_gamma", _x.dim() == 2 && _y.dim() == 2);
+    DEF_TENSOR_PRODUCT_TO_INDEXED_TENSOR( dblmatrixprod, long double, _x, "^alpha_beta", _y, "^beta_gamma", _x.dim() == 2 && _y.dim() == 2);
 
     AxB_matrix_prod = DEFN_matrixprod(A, B) DONE
     LOG "Same tensor matrix product but defined:\n" DONE
@@ -57,8 +58,24 @@ int main() {
     FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
         LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
     )
+
     LOG_ALONE("")
-    LOG __m(2, 34) DONE
+
+    srand (time(NULL));
+    auto rnd = [] () -> long double {
+        return rand() % 10 + 1;
+    };
+
+    LET Rando = HTensor<long double>::random_distribution(rnd, HShape({6, 6}));
+    LET Rando1 = HTensor<long double>::random_distribution(rnd, HShape({6, 6}));
+
+    LET Rando_sq = DEFN_dblmatrixprod(Rando, Rando1) DONE
+
+    LOG "Random tensor with random values\n" DONE
+
+    FOREACH(i, indices, IN_TENSOR, Rando_sq.tensor,
+        LOG Rando_sq.at(indices) ALSO SPACE DONE
+    )
 
     return 0;
 }
