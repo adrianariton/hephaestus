@@ -7,9 +7,11 @@
 
 #ifndef HTENSORS_H
 #define HTENSORS_H
+#define PARALELIZ_W_OMP
 
 #include "Greek.h"
 #include <vector>
+#include "omp.h"
 
 inline bool HTENS_COUT_DEPTH_DIM = false;
 
@@ -375,10 +377,8 @@ class HEinsteinNotation{
 
         deleteAll_vek(vek_tensorshape, {(int)to_fix_ind, (int)to_index_ind});
 
-        std::vector<T> vals_for_res;
-        for(int i=0; i<HShape(vek_tensorshape).signature(); ++i){
-            vals_for_res.push_back( (T)(0) );
-        }
+        std::vector<T> vals_for_res(HShape(vek_tensorshape).signature(), (T)0);
+    
 
         HTensor<T> _res_tensor(vals_for_res, HShape(vek_tensorshape) );
         //std::cout<<"deleteAll_vek"<<"\n";//debug
@@ -405,21 +405,42 @@ class HEinsteinNotation{
             else
                 coords_in_old.insert(coords_in_old.begin() + to_index_ind, 0);
 
-            if(_res_tensor.at(coords_in_res).val() == (T)(0))
+            if(_res_tensor.at(coords_in_res).val() == (T)(0)) {
+                // #para , clearly:)
+                // TODO: Make it work:)))))
 
-            // #para , clearly:)
-            for(int _si = 0; _si<size_of_contracted_dim; ++_si){
+                T reduction_sum = 0;
 
-                coords_in_old.at(to_fix_ind) = _si;
+                #ifdef PARALELIZ_W_OMP
+                                std::cout<<"\n\nOMP--------------\n";
 
-                coords_in_old.at(to_index_ind) = _si;
+                #pragma omp parallel for reduction(+:reduction_sum) num_threads(6)
+                #endif
+                for(int _si = 0; _si<size_of_contracted_dim; ++_si){
 
-                // ref
-                T _thisval = (*this).at(coords_in_old);
-                HTensor<T> _aux = HTensor<T>(_res_tensor.at(coords_in_res).val() + (*this).at(coords_in_old));
-                // ref
-                _res_tensor.at(coords_in_res) = _aux;
+                    #ifdef PARALELIZ_W_OMP
+                    int tid = omp_get_thread_num();
+                    std::cout<<_si<<" handled by thrd = "<<tid<<" --> s = ";
+                    std::cout<<reduction_sum<<"[]\n\n";
+
+                    #endif
+
+                    auto cds_cpy = coords_in_old;
+
+                    cds_cpy.at(to_fix_ind) = _si;
+                    cds_cpy.at(to_index_ind) = _si;
+
+                    // ref
+                    reduction_sum = reduction_sum + (*this).at(cds_cpy);
+                                     
+
+                }
+
+                _res_tensor.at(coords_in_res) =  HTensor<T>(reduction_sum);
+
             }
+
+            
         }
         return HEinsteinNotation(_res_tensor, indices_of_new, is_up_);
 
