@@ -19,6 +19,7 @@ USE_HEPHAESTUS_CPP
 using namespace std;
 
 int main() {
+    // 2. 6. 3. 5. 15. 9. 1. 8. 8.
     LET A = TENSOR(bigreal)({1, 2, 3, 
                              4, 5, 6,
                              7, 1, 0}, MATRIX_3X3) DONE
@@ -67,11 +68,18 @@ int main() {
         return rand() % 10 + 1;
     };
 
-    LET Rando = HTensor<long double>::random_distribution(rnd, HShape({6, 6}));
-    LET Rando1 = HTensor<long double>::random_distribution(rnd, HShape({6, 6}));
+    LET Rando = HTensor<long double>::random_distribution(rnd, HShape({20, 20}));
+    LET Rando1 = HTensor<long double>::random_distribution(rnd, HShape({20, 20}));
+
+
+
+    time_t start, end;
+    time(&start);
+    ios_base::sync_with_stdio(false);
 
     LET Rando_sq = DEFN_dblmatrixprod(Rando, Rando1) DONE
-
+    time(&end);
+    std::cout<<double(end - start)<<"\n\n";
     LOG "Random tensor with random values\n" DONE
 
     FOREACH(i, indices, IN_TENSOR, Rando_sq.tensor,
