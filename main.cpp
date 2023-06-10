@@ -58,7 +58,7 @@ int main() {
     FOREACH(i, indices, IN_TENSOR, AxB_matrix_prod.tensor,
         LOG AxB_matrix_prod.at(indices) ALSO SPACE DONE
     )
-    return 0;
+    //return 0;
 
     LOG_ALONE("")
 

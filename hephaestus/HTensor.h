@@ -381,7 +381,6 @@ class HEinsteinNotation{
     
 
         HTensor<T> _res_tensor(vals_for_res, HShape(vek_tensorshape) );
-        //std::cout<<"deleteAll_vek"<<"\n";//debug
 
         // #para?
         for(int i=0; i<HShape(vek_tensorshape).signature(); ++i){
@@ -406,22 +405,20 @@ class HEinsteinNotation{
                 coords_in_old.insert(coords_in_old.begin() + to_index_ind, 0);
 
             if(_res_tensor.at(coords_in_res).val() == (T)(0)) {
-                // #para , clearly:)
-                // TODO: Make it work:)))))
-
                 T reduction_sum = 0;
 
                 #ifdef PARALELIZ_W_OMP
-                                std::cout<<"\n\nOMP--------------\n";
-
-                #pragma omp parallel for reduction(+:reduction_sum) num_threads(6)
+                
+                #pragma omp declare reduction                                   \
+                    (rwzt:T:omp_out=omp_out + omp_in)
+                #pragma omp parallel for reduction(rwzt:reduction_sum) num_threads(60)
                 #endif
                 for(int _si = 0; _si<size_of_contracted_dim; ++_si){
 
                     #ifdef PARALELIZ_W_OMP
                     int tid = omp_get_thread_num();
-                    std::cout<<_si<<" handled by thrd = "<<tid<<" --> s = ";
-                    std::cout<<reduction_sum<<"[]\n\n";
+                    //std::cout<<_si<<" handled by thrd = "<<tid<<" --> s = ";
+                    //std::cout<<reduction_sum<<"[]\n\n";
 
                     #endif
 
