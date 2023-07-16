@@ -27,9 +27,7 @@ inline long double ath_quads_adaptive(FLAMBDA &f, D a, D b, D TOL){
         } else {
             S.push(std::make_pair(a, m));
             S.push(std::make_pair(m, b));
-
         }
-    
     }
     return I;
 }

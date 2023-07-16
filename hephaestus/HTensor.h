@@ -363,6 +363,12 @@ class HEinsteinNotation{
         return _h;
     }
 
+    // #
+    HEinsteinNotation fit_index_to_index(HEinsteinNotation t1, HEinsteinNotation t2, size_t to_fix_ind, size_t to_index_ind){
+        // #TODOIMP
+
+    }
+
     HEinsteinNotation fix_index_to_index(size_t to_fix_ind, size_t to_index_ind){
        
         HShape tensor_shape = HShape(tensor.measures());
@@ -524,6 +530,40 @@ class HEinsteinNotation{
         return HEinsteinNotation::reduce( tens_en.fix_index_to_index(qi, qj) );
 
     }
+
+
+    //TODOIMP
+    static HEinsteinNotation reduce(HEinsteinNotation r_tens_en, HEinsteinNotation l_tens_en){
+        int sw=0;
+        // #para
+        for(int i=0; i < r_tens_en.indices.size(); ++i){
+            for(int j=0; j < l_tens_en.indices.size(); ++j){
+                if(r_tens_en.is_up.at(i) && !l_tens_en.is_up.at(j) &&
+                    r_tens_en.indices.at(i) == l_tens_en.indices.at(j)){
+                    sw=1;
+                }
+            }
+            
+        }
+        if(sw == 0) return l_tens_en;
+        int qi=-1, qj=-1;
+        // #para
+        for(int i=0; i < r_tens_en.indices.size(); ++i){
+            for(int j=0; j < l_tens_en.indices.size(); ++j){
+                if(r_tens_en.is_up.at(i) && !l_tens_en.is_up.at(j) &&
+                    r_tens_en.indices.at(i) == l_tens_en.indices.at(j)){
+                    qi = i;
+                    qj = j;
+                }
+            }
+        }
+
+        std::cout<<qi<<" qij "<<qj<<std::endl; // debug
+        // #TODOIMP
+        return; //HEinsteinNotation::reduce( tens_en.fix_index_to_index(qi, qj) );
+
+    }
+
     static HEinsteinNotation to_upper(HEinsteinNotation entens, std::vector<int>& indices_to_lower){
         indices_to_lower = {};
 
